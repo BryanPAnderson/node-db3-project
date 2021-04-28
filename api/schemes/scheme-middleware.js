@@ -24,7 +24,7 @@ next()
   }
 */
 const validateScheme = (req, res, next) => {
-  if (typeof req.body.scheme_name != "string" || !req.body.scheme_name) {
+  if (typeof req.body.scheme_name !== "string" || !req.body.scheme_name) {
     res.status(404).json({
       message: "invalid scheme name"
     })
@@ -42,11 +42,17 @@ const validateScheme = (req, res, next) => {
   }
 */
 const validateStep = (req, res, next) => {
-  if (typeof req.body.instructions != "string" || !req.body.instructions) {
+  if (typeof req.body.instructions !== "string" || !req.body.instructions) {
     res.status(400).json({
       message: "Invalid step"
     })
   }
+  if (req.body.step_number < 1 || typeof req.body.step_number) {
+    res.status(400).json({
+      message: "invalid step"
+    })
+  }
+  next()
 }
 
 module.exports = {
